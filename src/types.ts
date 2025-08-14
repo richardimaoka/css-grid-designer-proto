@@ -7,14 +7,10 @@ type PlaceholderCircle = {
   radius: number;
 };
 
-type ChildType = PlaceholderRectangle | PlaceholderCircle;
+type PlaceholderType = PlaceholderRectangle | PlaceholderCircle;
 
 type Row = {
-  children: ChildType[];
+  children: PlaceholderType[];
 };
 
-type Column = {
-  children: ChildType[];
-};
-
-export { ChildType, Row };
+export { PlaceholderType, Row };

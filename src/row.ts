@@ -1,8 +1,10 @@
 import { ChildType, Row } from "./types";
 
 function addChild(parent: Row, newChild: ChildType): Row {
-  parent.children.push(newChild);
-  return parent;
+  return {
+    ...parent,
+    children: [...parent.children, newChild],
+  };
 }
 
 // In-source test for addChild function
@@ -26,7 +28,6 @@ if (import.meta.vitest) {
 
     const result = addChild(parent, newChild);
 
-    expect(parent).toBe(result);
     expect(parent.children.length).toBe(1);
     expect(parent.children).not.toContain(newChild);
   });

@@ -3,12 +3,12 @@ export type CSSGridContainer = {
 };
 
 export enum SizingType {
-  INTRINSIC = 'intrinsic',
-  EXTRINSIC = 'extrinsic'
+  FIXED = "fixed",
+  EXTRINSIC = "extrinsic",
 }
 
-export type IntrinsicSizing = {
-  type: SizingType.INTRINSIC;
+export type FixedSizing = {
+  type: SizingType.FIXED;
   valuePx: number;
 };
 
@@ -16,7 +16,7 @@ export type ExtrinsicSizing = {
   type: SizingType.EXTRINSIC;
 };
 
-export type Sizing = IntrinsicSizing | ExtrinsicSizing;
+export type Sizing = FixedSizing | ExtrinsicSizing;
 
 export type PlaceholderRect = {
   width: Sizing;

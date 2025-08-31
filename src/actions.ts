@@ -93,9 +93,45 @@ if (import.meta.vitest) {
 }
 
 function isFixedWidth(rect: PlaceholderRect): boolean {
-  return true;
+  return rect.width.type === SizingType.INTRINSIC;
+}
+
+if (import.meta.vitest) {
+  test("isFixedWidth should return true for intrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.INTRINSIC, valuePx: 100 },
+      height: { type: SizingType.INTRINSIC, valuePx: 50 },
+    };
+    expect(isFixedWidth(rect)).toBe(true);
+  });
+
+  test("isFixedWidth should return false for extrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.EXTRINSIC },
+      height: { type: SizingType.INTRINSIC, valuePx: 50 },
+    };
+    expect(isFixedWidth(rect)).toBe(false);
+  });
 }
 
 function isFixedHeight(rect: PlaceholderRect): boolean {
-  return true;
+  return rect.height.type === SizingType.INTRINSIC;
+}
+
+if (import.meta.vitest) {
+  test("isFixedHeight should return true for intrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.INTRINSIC, valuePx: 100 },
+      height: { type: SizingType.INTRINSIC, valuePx: 50 },
+    };
+    expect(isFixedHeight(rect)).toBe(true);
+  });
+
+  test("isFixedHeight should return false for extrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.INTRINSIC, valuePx: 100 },
+      height: { type: SizingType.EXTRINSIC },
+    };
+    expect(isFixedHeight(rect)).toBe(false);
+  });
 }

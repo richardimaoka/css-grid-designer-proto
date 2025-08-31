@@ -1,6 +1,50 @@
 import { test, expect } from "vitest";
 import { PlaceholderRect, SizingType } from "./types";
 
+function isFixedWidth(rect: PlaceholderRect): boolean {
+  return rect.width.type === SizingType.FIXED;
+}
+
+if (import.meta.vitest) {
+  test("isFixedWidth should return true for fixed sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.FIXED, valuePx: 100 },
+      height: { type: SizingType.FIXED, valuePx: 50 },
+    };
+    expect(isFixedWidth(rect)).toBe(true);
+  });
+
+  test("isFixedWidth should return false for extrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.EXTRINSIC },
+      height: { type: SizingType.FIXED, valuePx: 50 },
+    };
+    expect(isFixedWidth(rect)).toBe(false);
+  });
+}
+
+function isFixedHeight(rect: PlaceholderRect): boolean {
+  return rect.height.type === SizingType.FIXED;
+}
+
+if (import.meta.vitest) {
+  test("isFixedHeight should return true for fixed sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.FIXED, valuePx: 100 },
+      height: { type: SizingType.FIXED, valuePx: 50 },
+    };
+    expect(isFixedHeight(rect)).toBe(true);
+  });
+
+  test("isFixedHeight should return false for extrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.FIXED, valuePx: 100 },
+      height: { type: SizingType.EXTRINSIC },
+    };
+    expect(isFixedHeight(rect)).toBe(false);
+  });
+}
+
 function getWidthPx(rect: PlaceholderRect): number | SizingType.EXTRINSIC {
   if (rect.width.type === SizingType.EXTRINSIC) {
     return SizingType.EXTRINSIC;
@@ -89,49 +133,5 @@ if (import.meta.vitest) {
     };
     const result = changeHeight(rect, 200);
     expect(getHeightPx(result)).toBe(200);
-  });
-}
-
-function isFixedWidth(rect: PlaceholderRect): boolean {
-  return rect.width.type === SizingType.FIXED;
-}
-
-if (import.meta.vitest) {
-  test("isFixedWidth should return true for fixed sizing", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 100 },
-      height: { type: SizingType.FIXED, valuePx: 50 },
-    };
-    expect(isFixedWidth(rect)).toBe(true);
-  });
-
-  test("isFixedWidth should return false for extrinsic sizing", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.EXTRINSIC },
-      height: { type: SizingType.FIXED, valuePx: 50 },
-    };
-    expect(isFixedWidth(rect)).toBe(false);
-  });
-}
-
-function isFixedHeight(rect: PlaceholderRect): boolean {
-  return rect.height.type === SizingType.FIXED;
-}
-
-if (import.meta.vitest) {
-  test("isFixedHeight should return true for fixed sizing", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 100 },
-      height: { type: SizingType.FIXED, valuePx: 50 },
-    };
-    expect(isFixedHeight(rect)).toBe(true);
-  });
-
-  test("isFixedHeight should return false for extrinsic sizing", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 100 },
-      height: { type: SizingType.EXTRINSIC },
-    };
-    expect(isFixedHeight(rect)).toBe(false);
   });
 }

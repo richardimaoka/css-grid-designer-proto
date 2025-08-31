@@ -11,7 +11,7 @@ type PlaceholderType = PlaceholderRectangle | PlaceholderCircle;
 
 type Row = {
   children: PlaceholderType[];
-  grid: "centered";
+  // grid: "centered";
   //justify-items/content
   //align-items (content doesn't make difference from items? or does it?)
   //column-gap (no row gap)

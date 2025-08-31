@@ -88,3 +88,18 @@ if (import.meta.vitest) {
     expect(isExtrinsicHeight(grid)).toBe(false);
   });
 }
+
+function createEmptyGrid(): CSSGridContainer {
+  return {
+    width: { type: SizingType.EXTRINSIC },
+    height: { type: SizingType.INTRINSIC },
+  };
+}
+
+if (import.meta.vitest) {
+  test("createEmptyGrid should create a grid with extrinsic width and intrinsic height", () => {
+    const grid = createEmptyGrid();
+    expect(isExtrinsicWidth(grid)).toBe(true);
+    expect(isIntrinsicHeight(grid)).toBe(true);
+  });
+}

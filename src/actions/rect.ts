@@ -112,6 +112,7 @@ if (import.meta.vitest) {
     };
     const result = changeWidth(rect, 200);
     expect(getWidthPx(result)).toBe(200);
+    expect(getWidthPx(rect)).toBe(100); // Original rect should not be modified
   });
 }
 
@@ -133,5 +134,6 @@ if (import.meta.vitest) {
     };
     const result = changeHeight(rect, 200);
     expect(getHeightPx(result)).toBe(200);
+    expect(getHeightPx(rect)).toBe(50); // Original rect should not be modified
   });
 }

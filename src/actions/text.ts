@@ -31,5 +31,6 @@ if (import.meta.vitest) {
     };
     const result = changeContent(textContent, "Updated");
     expect(getContent(result)).toBe("Updated");
+    expect(getContent(textContent)).toBe("Original"); // Original textContent should not be modified
   });
 }

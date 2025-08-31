@@ -1,6 +1,7 @@
 export enum SizingType {
   FIXED = "fixed",
   EXTRINSIC = "extrinsic",
+  INTRINSIC = "intrinsic",
 }
 
 export type FixedSizing = {
@@ -10,6 +11,10 @@ export type FixedSizing = {
 
 export type ExtrinsicSizing = {
   type: SizingType.EXTRINSIC;
+};
+
+export type IntrinsicSizing = {
+  type: SizingType.INTRINSIC;
 };
 
 export type RectSizing = FixedSizing | ExtrinsicSizing;
@@ -23,6 +28,9 @@ export type TextContent = {
   content: string;
 };
 
+export type GridSizing = IntrinsicSizing | ExtrinsicSizing;
+
 export type CSSGridContainer = {
-  // To be defined
+  width: GridSizing;
+  height: GridSizing;
 };

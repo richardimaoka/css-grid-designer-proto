@@ -5,6 +5,16 @@
 GridContainer is for a CSS grid container, having `display: grid` in CSS.
 GridContainer can hold PlaceholderRect, TextContent, and GridContainer types.
 
+### Actions
+
+#### Create GridContainer
+
+- Create empty GridContainer
+
+#### Inspecting and Changing Sizing
+
+- Query whether width or height uses intrinsic or extrinsic sizing
+
 ## PlaceholderRect 
 
 ### Definition

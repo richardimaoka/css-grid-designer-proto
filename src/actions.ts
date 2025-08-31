@@ -1,18 +1,73 @@
-import { test, expect } from 'vitest';
-import { PlaceholderRect, SizingType } from './types';
+import { test, expect } from "vitest";
+import { PlaceholderRect, SizingType } from "./types";
 
-function changeWidth(rect: PlaceholderRect, widthPx: number): PlaceholderRect {
-  return rect;
+function getWidthPx(rect: PlaceholderRect): number | SizingType.EXTRINSIC {
+  if (rect.width.type === SizingType.EXTRINSIC) {
+    return SizingType.EXTRINSIC;
+  } else {
+    return rect.width.valuePx;
+  }
 }
 
 if (import.meta.vitest) {
-  test('changeWidth should return the same rect (placeholder)', () => {
+  test("getWidthPx should return valuePx for intrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.INTRINSIC, valuePx: 150 },
+      height: { type: SizingType.INTRINSIC, valuePx: 75 },
+    };
+    expect(getWidthPx(rect)).toBe(150);
+  });
+
+  test("getWidthPx should return EXTRINSIC for extrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.EXTRINSIC },
+      height: { type: SizingType.INTRINSIC, valuePx: 75 },
+    };
+    expect(getWidthPx(rect)).toBe(SizingType.EXTRINSIC);
+  });
+}
+
+function getHeightPx(rect: PlaceholderRect): number | SizingType.EXTRINSIC {
+  if (rect.height.type === SizingType.EXTRINSIC) {
+    return SizingType.EXTRINSIC;
+  } else {
+    return rect.height.valuePx;
+  }
+}
+
+if (import.meta.vitest) {
+  test("getHeightPx should return valuePx for intrinsic sizing", () => {
     const rect: PlaceholderRect = {
       width: { type: SizingType.INTRINSIC, valuePx: 100 },
-      height: { type: SizingType.INTRINSIC, valuePx: 50 }
+      height: { type: SizingType.INTRINSIC, valuePx: 150 },
+    };
+    expect(getHeightPx(rect)).toBe(150);
+  });
+
+  test("getHeightPx should return EXTRINSIC for extrinsic sizing", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.INTRINSIC, valuePx: 100 },
+      height: { type: SizingType.EXTRINSIC },
+    };
+    expect(getHeightPx(rect)).toBe(SizingType.EXTRINSIC);
+  });
+}
+
+function changeWidth(rect: PlaceholderRect, widthPx: number): PlaceholderRect {
+  return {
+    ...rect,
+    width: { type: SizingType.INTRINSIC, valuePx: widthPx },
+  };
+}
+
+if (import.meta.vitest) {
+  test("changeWidth should change the width", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.INTRINSIC, valuePx: 100 },
+      height: { type: SizingType.INTRINSIC, valuePx: 50 },
     };
     const result = changeWidth(rect, 200);
-    expect(result).toBe(rect);
+    expect(getWidthPx(result)).toBe(200);
   });
 }
 
@@ -20,7 +75,21 @@ function changeHeight(
   rect: PlaceholderRect,
   heightPx: number
 ): PlaceholderRect {
-  return rect;
+  return {
+    ...rect,
+    height: { type: SizingType.INTRINSIC, valuePx: heightPx },
+  };
+}
+
+if (import.meta.vitest) {
+  test("changeHeight should change the height", () => {
+    const rect: PlaceholderRect = {
+      width: { type: SizingType.INTRINSIC, valuePx: 100 },
+      height: { type: SizingType.INTRINSIC, valuePx: 50 },
+    };
+    const result = changeHeight(rect, 200);
+    expect(getHeightPx(result)).toBe(200);
+  });
 }
 
 function isFixedWidth(rect: PlaceholderRect): boolean {

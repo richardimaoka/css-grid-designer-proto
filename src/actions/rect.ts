@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import { PlaceholderRect, SizingType } from "./types";
+import { PlaceholderRect, SizingType } from "../types";
 
 function isFixedWidth(rect: PlaceholderRect): boolean {
   return rect.width.type === SizingType.FIXED;

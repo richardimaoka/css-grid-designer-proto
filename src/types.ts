@@ -1,28 +1,28 @@
-type CSSGridContainer = {
+export type CSSGridContainer = {
   // To be defined
 };
 
-enum SizingType {
+export enum SizingType {
   INTRINSIC = 'intrinsic',
   EXTRINSIC = 'extrinsic'
 }
 
-type IntrinsicSizing = {
+export type IntrinsicSizing = {
   type: SizingType.INTRINSIC;
   valuePx: number;
 };
 
-type ExtrinsicSizing = {
+export type ExtrinsicSizing = {
   type: SizingType.EXTRINSIC;
 };
 
-type Sizing = IntrinsicSizing | ExtrinsicSizing;
+export type Sizing = IntrinsicSizing | ExtrinsicSizing;
 
-type PlaceholderRect = {
+export type PlaceholderRect = {
   width: Sizing;
   height: Sizing;
 };
 
-type TextContent = {
+export type TextContent = {
   content: string;
 };

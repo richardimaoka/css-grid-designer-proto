@@ -2,13 +2,11 @@ type CSSGridContainer = {
   // To be defined
 };
 
-type PlaceholderRectangle = {
-  width: number;
-  height: number;
+type PlaceholderRect = {
+  widthPx: number;
+  heightPx: number;
 };
 
-type Text = {
+type TextContent = {
   content: string;
 };
-
-export { CSSGridContainer, PlaceholderRectangle, Text };

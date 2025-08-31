@@ -1,12 +1,15 @@
 # Data Types
 
-## CSS Grid Container
+## GridContainer
 
-CSS Grid Container can hold Placeholder Rectangle, Text, and CSS Grid Container types.
+GridContainer is for a CSS grid container, having `display: grid` in CSS.
+GridContainer can hold PlaceholderRect, TextContent, and GridContainer types.
 
-## Placeholder Rectangle
+## PlaceholderRect 
 
-Placeholder Rectangle can specify its sizing. 
+PlaceholderRect is for a placeholder rectangle.
+
+PlaceholderRect can specify its sizing. 
 - Sizing should be either fixed or extrinsic. 
 - Sizing is in width and height, and they can be specified individually.
 
@@ -14,6 +17,6 @@ For example:
 - If width is extrinsically sized, it behaves the same as the default width of `<div>`
 - If height is extrinsically sized, it behaves the same as `height: 100%` in CSS for `<div>`
 
-## Text
+## TextContent
 
-Text holds content.
+TextContent holds content.

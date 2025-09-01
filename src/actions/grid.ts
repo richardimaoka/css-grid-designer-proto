@@ -1,5 +1,11 @@
 import { test, expect } from "vitest";
-import { CSSGridContainer, SizingType, GridChild, PlaceholderRect, TextContent } from "../types";
+import {
+  CSSGridContainer,
+  SizingType,
+  GridChild,
+  PlaceholderRect,
+  TextContent,
+} from "../types";
 import { createPlaceholderRect } from "./rect";
 
 function isIntrinsicWidth(grid: CSSGridContainer): boolean {
@@ -98,12 +104,46 @@ if (import.meta.vitest) {
   });
 }
 
-function createEmptyGrid(): CSSGridContainer {
-  return {
-    width: { type: SizingType.EXTRINSIC },
-    height: { type: SizingType.INTRINSIC },
-    children: [],
-  };
+function createEmptyGrid(
+  options?:
+    | undefined
+    | {
+        width: SizingType.EXTRINSIC | SizingType.INTRINSIC;
+      }
+    | {
+        height: SizingType.EXTRINSIC | SizingType.INTRINSIC;
+      }
+    | {
+        width: SizingType.EXTRINSIC | SizingType.INTRINSIC;
+        height: SizingType.EXTRINSIC | SizingType.INTRINSIC;
+      }
+): CSSGridContainer {
+  if (!options) {
+    // Default empty CSS grid
+    return {
+      width: { type: SizingType.EXTRINSIC },
+      height: { type: SizingType.INTRINSIC },
+      children: [],
+    };
+  } else if ("width" in options && "height" in options) {
+    return {
+      width: { type: options.width },
+      height: { type: options.height },
+      children: [],
+    };
+  } else if ("width" in options) {
+    return {
+      width: { type: options.width },
+      height: { type: SizingType.INTRINSIC }, // Default height is intrinsic
+      children: [],
+    };
+  } else {
+    return {
+      width: { type: SizingType.EXTRINSIC }, // Default width is intrinsic
+      height: { type: options.height },
+      children: [],
+    };
+  }
 }
 
 if (import.meta.vitest) {
@@ -125,7 +165,10 @@ function addChild(grid: CSSGridContainer, child: GridChild): CSSGridContainer {
 if (import.meta.vitest) {
   test("addChild should add a PlaceholderRect child to the grid", () => {
     const grid = createEmptyGrid();
-    const child: PlaceholderRect = createPlaceholderRect({ widthPx: 100, heightPx: 50 });
+    const child: PlaceholderRect = createPlaceholderRect({
+      widthPx: 100,
+      heightPx: 50,
+    });
     const updatedGrid = addChild(grid, child);
     expect(getChildren(updatedGrid)).toHaveLength(1);
     expect(getChildren(updatedGrid)[0]).toEqual(child);
@@ -147,7 +190,7 @@ if (import.meta.vitest) {
     const child2: PlaceholderRect = createPlaceholderRect({ heightPx: 30 });
     const gridWithChild1 = addChild(grid, child1);
     const gridWithBoth = addChild(gridWithChild1, child2);
-    
+
     expect(getChildren(gridWithBoth)).toHaveLength(2);
     expect(getChildren(gridWithBoth)[0]).toEqual(child1);
     expect(getChildren(gridWithBoth)[1]).toEqual(child2);
@@ -170,7 +213,7 @@ if (import.meta.vitest) {
     const child1: TextContent = { content: "test1" };
     const child2: TextContent = { content: "test2" };
     const gridWithChildren = addChild(addChild(grid, child1), child2);
-    
+
     const updatedGrid = removeChild(gridWithChildren, 0);
     expect(getChildren(updatedGrid)).toHaveLength(1);
     expect(getChildren(updatedGrid)[0]).toEqual(child2);
@@ -180,7 +223,7 @@ if (import.meta.vitest) {
     const grid = createEmptyGrid();
     const child: TextContent = { content: "test" };
     const gridWithChild = addChild(grid, child);
-    
+
     expect(removeChild(gridWithChild, -1)).toEqual(gridWithChild);
     expect(removeChild(gridWithChild, 1)).toEqual(gridWithChild);
   });
@@ -195,7 +238,7 @@ if (import.meta.vitest) {
     const grid = createEmptyGrid();
     const child: TextContent = { content: "test" };
     const gridWithChild = addChild(grid, child);
-    
+
     const children = getChildren(gridWithChild);
     expect(children).toEqual([child]);
     expect(children).not.toBe(gridWithChild.children);

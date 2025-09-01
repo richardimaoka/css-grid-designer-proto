@@ -1,5 +1,6 @@
 import { test, expect } from "vitest";
 import { CSSGridContainer, SizingType, GridChild, PlaceholderRect, TextContent } from "../types";
+import { createPlaceholderRect } from "./rect";
 
 function isIntrinsicWidth(grid: CSSGridContainer): boolean {
   return grid.width.type === SizingType.INTRINSIC;
@@ -124,10 +125,7 @@ function addChild(grid: CSSGridContainer, child: GridChild): CSSGridContainer {
 if (import.meta.vitest) {
   test("addChild should add a PlaceholderRect child to the grid", () => {
     const grid = createEmptyGrid();
-    const child: PlaceholderRect = { 
-      width: { type: SizingType.FIXED, valuePx: 100 }, 
-      height: { type: SizingType.FIXED, valuePx: 50 } 
-    };
+    const child: PlaceholderRect = createPlaceholderRect({ widthPx: 100, heightPx: 50 });
     const updatedGrid = addChild(grid, child);
     expect(getChildren(updatedGrid)).toHaveLength(1);
     expect(getChildren(updatedGrid)[0]).toEqual(child);
@@ -146,10 +144,7 @@ if (import.meta.vitest) {
   test("addChild should add multiple children", () => {
     const grid = createEmptyGrid();
     const child1: TextContent = { content: "test1" };
-    const child2: PlaceholderRect = { 
-      width: { type: SizingType.EXTRINSIC }, 
-      height: { type: SizingType.FIXED, valuePx: 30 } 
-    };
+    const child2: PlaceholderRect = createPlaceholderRect({ heightPx: 30 });
     const gridWithChild1 = addChild(grid, child1);
     const gridWithBoth = addChild(gridWithChild1, child2);
     

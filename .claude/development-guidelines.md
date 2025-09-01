@@ -3,11 +3,10 @@
 ## Feature Development Workflow
 
 - **Specifications First**: When working on a new feature, update `.claude/specifications/` first, before updating `src/`
-- **Documentation-Driven Development**: Ensure specifications are complete and accurate before implementing code
 
 ## Testing Standards
 
-- **Test Execution**: When updating `src/actions`, always run vitest and make sure tests pass
+- **Test Execution**: When updating `src/actions`, always run `pnpm test:once` and make sure tests pass
 - **Test Failures**: If tests fail, ask for advice rather than randomly fixing implementation
 - **Test Organization**: Add in-source unit tests right after each function, instead of at the bottom of the file
 

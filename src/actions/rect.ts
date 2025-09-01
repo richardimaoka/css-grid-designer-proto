@@ -15,7 +15,7 @@ import { PlaceholderRect, SizingType } from "../types";
  * createPlaceholderRect({ widthPx: 100, heightPx: 50 })
  *
  */
-function createPlaceholderRect(
+export function createPlaceholderRect(
   options:
     | {
         widthPx: number;
@@ -68,10 +68,7 @@ function isFixedWidth(rect: PlaceholderRect): boolean {
 
 if (import.meta.vitest) {
   test("isFixedWidth should return true for fixed sizing", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 100 },
-      height: { type: SizingType.FIXED, valuePx: 50 },
-    };
+    const rect: PlaceholderRect = createPlaceholderRect({ widthPx: 100, heightPx: 50 });
     expect(isFixedWidth(rect)).toBe(true);
   });
 
@@ -90,10 +87,7 @@ function isFixedHeight(rect: PlaceholderRect): boolean {
 
 if (import.meta.vitest) {
   test("isFixedHeight should return true for fixed sizing", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 100 },
-      height: { type: SizingType.FIXED, valuePx: 50 },
-    };
+    const rect: PlaceholderRect = createPlaceholderRect({ widthPx: 100, heightPx: 50 });
     expect(isFixedHeight(rect)).toBe(true);
   });
 
@@ -116,10 +110,7 @@ function getWidthPx(rect: PlaceholderRect): number | SizingType.EXTRINSIC {
 
 if (import.meta.vitest) {
   test("getWidthPx should return value for fixed sizing", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 150 },
-      height: { type: SizingType.FIXED, valuePx: 75 },
-    };
+    const rect: PlaceholderRect = createPlaceholderRect({ widthPx: 150, heightPx: 75 });
     expect(getWidthPx(rect)).toBe(150);
   });
 
@@ -142,10 +133,7 @@ function getHeightPx(rect: PlaceholderRect): number | SizingType.EXTRINSIC {
 
 if (import.meta.vitest) {
   test("getHeightPx should return value for fixed sizing", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 100 },
-      height: { type: SizingType.FIXED, valuePx: 150 },
-    };
+    const rect: PlaceholderRect = createPlaceholderRect({ widthPx: 100, heightPx: 150 });
     expect(getHeightPx(rect)).toBe(150);
   });
 
@@ -167,10 +155,7 @@ function changeWidth(rect: PlaceholderRect, widthPx: number): PlaceholderRect {
 
 if (import.meta.vitest) {
   test("changeWidth should change the width", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 100 },
-      height: { type: SizingType.FIXED, valuePx: 50 },
-    };
+    const rect: PlaceholderRect = createPlaceholderRect({ widthPx: 100, heightPx: 50 });
     const result = changeWidth(rect, 200);
     expect(getWidthPx(result)).toBe(200);
     expect(getWidthPx(rect)).toBe(100); // Original rect should not be modified
@@ -189,10 +174,7 @@ function changeHeight(
 
 if (import.meta.vitest) {
   test("changeHeight should change the height", () => {
-    const rect: PlaceholderRect = {
-      width: { type: SizingType.FIXED, valuePx: 100 },
-      height: { type: SizingType.FIXED, valuePx: 50 },
-    };
+    const rect: PlaceholderRect = createPlaceholderRect({ widthPx: 100, heightPx: 50 });
     const result = changeHeight(rect, 200);
     expect(getHeightPx(result)).toBe(200);
     expect(getHeightPx(rect)).toBe(50); // Original rect should not be modified

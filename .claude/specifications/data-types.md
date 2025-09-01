@@ -5,15 +5,16 @@
     - Can hold PlaceholderRect and TextContent types
   - Actions:
     - Creation:
-      - Create an empty instance of GridContainer, with extrinsic width and intrinsic height by default
+      - Create an empty instance of GridContainer. The default sizing is extrinsic width and intrinsic height.
     - Sizing:
       - Check whether width is extrinsically or intrinsically sized
       - Check whether height is extrinsically or intrinsically sized
       - Query whether width or height uses intrinsic or extrinsic sizing
     - Children:
-      - Add child elements (PlaceholderRect, TextContent) to the container
+      - Add a child element (PlaceholderRect, TextContent) to the container
+      - Insert a child element by index
       - Remove child elements by index
-      - Access child elements immutably (return copy to prevent mutations)
+      - Access a child element immutably (return copy to prevent mutations)
       - Maintain immutability when modifying child collections
 
 - **PlaceholderRect**: Placeholder rectangle

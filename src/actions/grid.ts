@@ -252,6 +252,90 @@ if (import.meta.vitest) {
   });
 }
 
+function insertChild(grid: CSSGridContainer, child: GridChild, index: number): CSSGridContainer {
+  if (index < 0 || index > grid.children.length) {
+    return grid;
+  }
+  const newChildren = [...grid.children];
+  newChildren.splice(index, 0, child);
+  return {
+    ...grid,
+    children: newChildren,
+  };
+}
+
+if (import.meta.vitest) {
+  test("insertChild should insert a child at the specified index", () => {
+    const grid = createEmptyGrid();
+    const child1: TextContent = { content: "first" };
+    const child2: TextContent = { content: "second" };
+    const child3: TextContent = { content: "middle" };
+    
+    const gridWithTwo = addChild(addChild(grid, child1), child2);
+    const gridWithInserted = insertChild(gridWithTwo, child3, 1);
+    
+    expect(getChildren(gridWithInserted)).toHaveLength(3);
+    expect(getChildren(gridWithInserted)[0]).toEqual(child1);
+    expect(getChildren(gridWithInserted)[1]).toEqual(child3);
+    expect(getChildren(gridWithInserted)[2]).toEqual(child2);
+  });
+
+  test("insertChild should insert at beginning when index is 0", () => {
+    const grid = createEmptyGrid();
+    const existingChild: TextContent = { content: "existing" };
+    const newChild: PlaceholderRect = createPlaceholderRect({ widthPx: 100 });
+    
+    const gridWithChild = addChild(grid, existingChild);
+    const gridWithInserted = insertChild(gridWithChild, newChild, 0);
+    
+    expect(getChildren(gridWithInserted)).toHaveLength(2);
+    expect(getChildren(gridWithInserted)[0]).toEqual(newChild);
+    expect(getChildren(gridWithInserted)[1]).toEqual(existingChild);
+  });
+
+  test("insertChild should insert at end when index equals length", () => {
+    const grid = createEmptyGrid();
+    const existingChild: TextContent = { content: "existing" };
+    const newChild: PlaceholderRect = createPlaceholderRect({ heightPx: 50 });
+    
+    const gridWithChild = addChild(grid, existingChild);
+    const gridWithInserted = insertChild(gridWithChild, newChild, 1);
+    
+    expect(getChildren(gridWithInserted)).toHaveLength(2);
+    expect(getChildren(gridWithInserted)[0]).toEqual(existingChild);
+    expect(getChildren(gridWithInserted)[1]).toEqual(newChild);
+  });
+
+  test("insertChild should return unchanged grid for negative index", () => {
+    const grid = createEmptyGrid();
+    const child: TextContent = { content: "test" };
+    const gridWithChild = addChild(grid, child);
+    const newChild: TextContent = { content: "new" };
+    
+    const result = insertChild(gridWithChild, newChild, -1);
+    expect(result).toEqual(gridWithChild);
+  });
+
+  test("insertChild should return unchanged grid for index greater than length", () => {
+    const grid = createEmptyGrid();
+    const child: TextContent = { content: "test" };
+    const gridWithChild = addChild(grid, child);
+    const newChild: TextContent = { content: "new" };
+    
+    const result = insertChild(gridWithChild, newChild, 2);
+    expect(result).toEqual(gridWithChild);
+  });
+
+  test("insertChild should work with empty grid", () => {
+    const grid = createEmptyGrid();
+    const child: TextContent = { content: "first" };
+    
+    const result = insertChild(grid, child, 0);
+    expect(getChildren(result)).toHaveLength(1);
+    expect(getChildren(result)[0]).toEqual(child);
+  });
+}
+
 function removeChild(grid: CSSGridContainer, index: number): CSSGridContainer {
   if (index < 0 || index >= grid.children.length) {
     return grid;

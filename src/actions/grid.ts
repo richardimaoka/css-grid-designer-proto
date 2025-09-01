@@ -104,6 +104,23 @@ if (import.meta.vitest) {
   });
 }
 
+/**
+ * Creates an empty CSS grid container with the specified sizing options.
+ *
+ * @example
+ * // Create with default sizing (default width = extrinsic, default height = intrinsic)
+ * createEmptyGrid()
+ * @example
+ * // Create with width only (height becomes default = intrinsic)
+ * createEmptyGrid({ width: SizingType.INTRINSIC })
+ * @example
+ * // Create with height only (width becomes default = extrinsic)
+ * createEmptyGrid({ height: SizingType.EXTRINSIC })
+ * @example
+ * // Create with both dimensions
+ * createEmptyGrid({ width: SizingType.EXTRINSIC, height: SizingType.INTRINSIC })
+ *
+ */
 function createEmptyGrid(
   options?:
     | undefined
@@ -151,6 +168,44 @@ if (import.meta.vitest) {
     const grid = createEmptyGrid();
     expect(isExtrinsicWidth(grid)).toBe(true);
     expect(isIntrinsicHeight(grid)).toBe(true);
+    expect(getChildren(grid)).toEqual([]);
+  });
+
+  test("createEmptyGrid should create a grid with EXTRINSIC width when width option is provided", () => {
+    const grid = createEmptyGrid({ width: SizingType.EXTRINSIC });
+    expect(isExtrinsicWidth(grid)).toBe(true);
+    expect(isIntrinsicHeight(grid)).toBe(true);
+    expect(getChildren(grid)).toEqual([]);
+  });
+
+  test("createEmptyGrid should create a grid with intrinsic width when width option is provided", () => {
+    const grid = createEmptyGrid({ width: SizingType.INTRINSIC });
+    expect(isIntrinsicWidth(grid)).toBe(true);
+    expect(isIntrinsicHeight(grid)).toBe(true);
+    expect(getChildren(grid)).toEqual([]);
+  });
+
+  test("createEmptyGrid should create a grid with extrinsic height when height option is provided", () => {
+    const grid = createEmptyGrid({ height: SizingType.EXTRINSIC });
+    expect(isExtrinsicWidth(grid)).toBe(true);
+    expect(isExtrinsicHeight(grid)).toBe(true);
+    expect(getChildren(grid)).toEqual([]);
+  });
+
+  test("createEmptyGrid should create a grid with intrinsic height when height option is provided", () => {
+    const grid = createEmptyGrid({ height: SizingType.INTRINSIC });
+    expect(isExtrinsicWidth(grid)).toBe(true);
+    expect(isIntrinsicHeight(grid)).toBe(true);
+    expect(getChildren(grid)).toEqual([]);
+  });
+
+  test("createEmptyGrid should create a grid with intrinsic width and extrinsic height", () => {
+    const grid = createEmptyGrid({
+      width: SizingType.INTRINSIC,
+      height: SizingType.EXTRINSIC,
+    });
+    expect(isIntrinsicWidth(grid)).toBe(true);
+    expect(isExtrinsicHeight(grid)).toBe(true);
     expect(getChildren(grid)).toEqual([]);
   });
 }

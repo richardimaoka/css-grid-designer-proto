@@ -25,6 +25,13 @@ GridContainer can hold PlaceholderRect, TextContent, and GridContainer types.
 
 - Query whether width or height uses intrinsic or extrinsic sizing
 
+#### Child Management
+
+- Add child elements (PlaceholderRect, TextContent) to the container
+- Remove child elements by index
+- Access child elements immutably (return copy to prevent mutations)
+- Maintain immutability when modifying child collections
+
 ## PlaceholderRect 
 
 ### Definition

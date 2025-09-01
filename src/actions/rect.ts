@@ -1,47 +1,64 @@
 import { test, expect } from "vitest";
 import { PlaceholderRect, SizingType } from "../types";
 
-function createPlaceholderRect(options: { widthPx: number }): PlaceholderRect;
-function createPlaceholderRect(options: { heightPx: number }): PlaceholderRect;
-function createPlaceholderRect(options: { widthPx: number; heightPx: number }): PlaceholderRect;
-function createPlaceholderRect(options: { widthPx?: number; heightPx?: number }): PlaceholderRect {
-  if (options.widthPx !== undefined && options.heightPx !== undefined) {
+/**
+ * Creates a PlaceholderRect with the specified dimensions.
+ *
+ * @example
+ * // Create with width only (height becomes extrinsic)
+ * createPlaceholderRect({ widthPx: 100 })
+ * @example
+ * // Create with height only (width becomes extrinsic)
+ * createPlaceholderRect({ heightPx: 50 })
+ * @example
+ * // Create with both dimensions
+ * createPlaceholderRect({ widthPx: 100, heightPx: 50 })
+ *
+ */
+function createPlaceholderRect(
+  options:
+    | {
+        widthPx: number;
+        heightPx: number;
+      }
+    | { widthPx: number }
+    | { heightPx: number }
+): PlaceholderRect {
+  if ("widthPx" in options && "heightPx" in options) {
     return {
       width: { type: SizingType.FIXED, valuePx: options.widthPx },
-      height: { type: SizingType.FIXED, valuePx: options.heightPx }
+      height: { type: SizingType.FIXED, valuePx: options.heightPx },
     };
-  } else if (options.widthPx !== undefined) {
+  } else if ("widthPx" in options) {
     return {
       width: { type: SizingType.FIXED, valuePx: options.widthPx },
-      height: { type: SizingType.EXTRINSIC }
-    };
-  } else if (options.heightPx !== undefined) {
-    return {
-      width: { type: SizingType.EXTRINSIC },
-      height: { type: SizingType.FIXED, valuePx: options.heightPx }
+      height: { type: SizingType.EXTRINSIC },
     };
   } else {
-    throw new Error("At least one dimension must be specified");
+    return {
+      width: { type: SizingType.EXTRINSIC },
+      height: { type: SizingType.FIXED, valuePx: options.heightPx },
+    };
   }
 }
 
 if (import.meta.vitest) {
   test("createPlaceholderRect should create rect with width only", () => {
     const rect = createPlaceholderRect({ widthPx: 100 });
-    expect(rect.width).toEqual({ type: SizingType.FIXED, valuePx: 100 });
-    expect(rect.height).toEqual({ type: SizingType.EXTRINSIC });
+    expect(getWidthPx(rect)).toEqual(100);
+    expect(getHeightPx(rect)).toEqual(SizingType.EXTRINSIC);
   });
 
   test("createPlaceholderRect should create rect with height only", () => {
     const rect = createPlaceholderRect({ heightPx: 50 });
-    expect(rect.width).toEqual({ type: SizingType.EXTRINSIC });
-    expect(rect.height).toEqual({ type: SizingType.FIXED, valuePx: 50 });
+    expect(getWidthPx(rect)).toEqual(SizingType.EXTRINSIC);
+    expect(getHeightPx(rect)).toEqual(50);
   });
 
   test("createPlaceholderRect should create rect with both width and height", () => {
     const rect = createPlaceholderRect({ widthPx: 100, heightPx: 50 });
-    expect(rect.width).toEqual({ type: SizingType.FIXED, valuePx: 100 });
-    expect(rect.height).toEqual({ type: SizingType.FIXED, valuePx: 50 });
+    expect(getWidthPx(rect)).toEqual(100);
+    expect(getHeightPx(rect)).toEqual(50);
   });
 }
 

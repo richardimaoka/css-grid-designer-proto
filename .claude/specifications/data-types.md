@@ -24,6 +24,10 @@
       - If width is extrinsically sized, it behaves the same as the default width of `<div>`
       - If height is extrinsically sized, it behaves the same as `height: 100%` in CSS for `<div>`
   - Actions:
+    - Creation:
+      - Create a rectangle, by specifying the width only, then the height becomes intrinsically set
+      - Create a rectangle, by specifying the height only, then the width becomes extrinsically set
+      - Create a rectangle, by specifying the width and height T
     - Sizing Inspection:
       - Query whether width or height uses fixed or extrinsic sizing
       - Extract pixel values for fixed-sized dimensions

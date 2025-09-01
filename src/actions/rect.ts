@@ -1,6 +1,50 @@
 import { test, expect } from "vitest";
 import { PlaceholderRect, SizingType } from "../types";
 
+function createPlaceholderRect(options: { widthPx: number }): PlaceholderRect;
+function createPlaceholderRect(options: { heightPx: number }): PlaceholderRect;
+function createPlaceholderRect(options: { widthPx: number; heightPx: number }): PlaceholderRect;
+function createPlaceholderRect(options: { widthPx?: number; heightPx?: number }): PlaceholderRect {
+  if (options.widthPx !== undefined && options.heightPx !== undefined) {
+    return {
+      width: { type: SizingType.FIXED, valuePx: options.widthPx },
+      height: { type: SizingType.FIXED, valuePx: options.heightPx }
+    };
+  } else if (options.widthPx !== undefined) {
+    return {
+      width: { type: SizingType.FIXED, valuePx: options.widthPx },
+      height: { type: SizingType.EXTRINSIC }
+    };
+  } else if (options.heightPx !== undefined) {
+    return {
+      width: { type: SizingType.EXTRINSIC },
+      height: { type: SizingType.FIXED, valuePx: options.heightPx }
+    };
+  } else {
+    throw new Error("At least one dimension must be specified");
+  }
+}
+
+if (import.meta.vitest) {
+  test("createPlaceholderRect should create rect with width only", () => {
+    const rect = createPlaceholderRect({ widthPx: 100 });
+    expect(rect.width).toEqual({ type: SizingType.FIXED, valuePx: 100 });
+    expect(rect.height).toEqual({ type: SizingType.EXTRINSIC });
+  });
+
+  test("createPlaceholderRect should create rect with height only", () => {
+    const rect = createPlaceholderRect({ heightPx: 50 });
+    expect(rect.width).toEqual({ type: SizingType.EXTRINSIC });
+    expect(rect.height).toEqual({ type: SizingType.FIXED, valuePx: 50 });
+  });
+
+  test("createPlaceholderRect should create rect with both width and height", () => {
+    const rect = createPlaceholderRect({ widthPx: 100, heightPx: 50 });
+    expect(rect.width).toEqual({ type: SizingType.FIXED, valuePx: 100 });
+    expect(rect.height).toEqual({ type: SizingType.FIXED, valuePx: 50 });
+  });
+}
+
 function isFixedWidth(rect: PlaceholderRect): boolean {
   return rect.width.type === SizingType.FIXED;
 }

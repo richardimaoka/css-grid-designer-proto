@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import { CSSGridContainer, SizingType } from "../types";
+import { CSSGridContainer, SizingType, GridChild } from "../types";
 
 function isIntrinsicWidth(grid: CSSGridContainer): boolean {
   return grid.width.type === SizingType.INTRINSIC;
@@ -93,6 +93,7 @@ function createEmptyGrid(): CSSGridContainer {
   return {
     width: { type: SizingType.EXTRINSIC },
     height: { type: SizingType.INTRINSIC },
+    children: [],
   };
 }
 

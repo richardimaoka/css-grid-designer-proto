@@ -7,6 +7,16 @@ GridContainer can hold PlaceholderRect, TextContent, and GridContainer types.
 
 ### Actions
 
+#### Creation
+
+- Create an instance of GridContainer, with extrinsic width and intrinsic height by default
+
+#### Extrinsic or Intrinsic Sizing
+
+- Check whether whether is extrinsically or intrinsically sized
+- Check whether height is extrinsically or intrinsically sized
+
+
 #### Create GridContainer
 
 - Create empty GridContainer

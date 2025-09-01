@@ -30,7 +30,10 @@ export type TextContent = {
 
 export type GridSizing = IntrinsicSizing | ExtrinsicSizing;
 
+export type GridChild = PlaceholderRect | TextContent | CSSGridContainer;
+
 export type CSSGridContainer = {
   width: GridSizing;
   height: GridSizing;
+  children: GridChild[];
 };

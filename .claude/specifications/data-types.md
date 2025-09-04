@@ -11,7 +11,7 @@
       - Check whether height is extrinsically or intrinsically sized
       - Query whether width or height uses intrinsic or extrinsic sizing
     - Children:
-      - Add a child element (PlaceholderRect, TextContent) to the container
+      - Append a child element (PlaceholderRect, TextContent) to the container
       - Insert a child element by index
       - Remove child elements by index
       - Access a child element immutably (return copy to prevent mutations)

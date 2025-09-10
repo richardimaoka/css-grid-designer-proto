@@ -1,3 +1,12 @@
+import PlaceholderRectView from "./components/PlaceholderRectView";
+import { createPlaceholderRect } from "@/src/actions/rect";
+
 export default function Home() {
-  return <div>empty</div>;
+  const rect = createPlaceholderRect({ widthPx: 200, heightPx: 200 });
+
+  return (
+    <div>
+      <PlaceholderRectView rect={rect} />
+    </div>
+  );
 }

@@ -1,4 +1,3 @@
-import { test, expect } from "vitest";
 import {
   CSSGridContainer,
   SizingType,
@@ -13,6 +12,8 @@ function isIntrinsicWidth(grid: CSSGridContainer): boolean {
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("isIntrinsicWidth should return true for intrinsic width sizing", () => {
     const grid: CSSGridContainer = {
       width: { type: SizingType.INTRINSIC },
@@ -37,6 +38,8 @@ function isExtrinsicWidth(grid: CSSGridContainer): boolean {
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("isExtrinsicWidth should return true for extrinsic width sizing", () => {
     const grid: CSSGridContainer = {
       width: { type: SizingType.EXTRINSIC },
@@ -61,6 +64,8 @@ function isIntrinsicHeight(grid: CSSGridContainer): boolean {
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("isIntrinsicHeight should return true for intrinsic height sizing", () => {
     const grid: CSSGridContainer = {
       width: { type: SizingType.INTRINSIC },
@@ -85,6 +90,8 @@ function isExtrinsicHeight(grid: CSSGridContainer): boolean {
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("isExtrinsicHeight should return true for extrinsic height sizing", () => {
     const grid: CSSGridContainer = {
       width: { type: SizingType.INTRINSIC },
@@ -164,6 +171,8 @@ function createEmptyGrid(
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("createEmptyGrid should create a grid with extrinsic width and intrinsic height", () => {
     const grid = createEmptyGrid();
     expect(isExtrinsicWidth(grid)).toBe(true);
@@ -221,6 +230,8 @@ function appendChild(
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("addChild should add a PlaceholderRect child to the grid", () => {
     const grid = createEmptyGrid();
     const child: PlaceholderRect = createPlaceholderRect({
@@ -272,6 +283,8 @@ function insertChild(
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("insertChild should insert a child at the specified index", () => {
     const grid = createEmptyGrid();
     const child1: TextContent = { content: "first" };
@@ -354,6 +367,8 @@ function removeChild(grid: CSSGridContainer, index: number): CSSGridContainer {
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("removeChild should remove a child at the specified index", () => {
     const grid = createEmptyGrid();
     const child1: TextContent = { content: "test1" };
@@ -379,7 +394,10 @@ function getChildren(grid: CSSGridContainer): GridChild[] {
   return grid.children;
 }
 
-function getChild(grid: CSSGridContainer, index: number): GridChild | undefined {
+function getChild(
+  grid: CSSGridContainer,
+  index: number
+): GridChild | undefined {
   if (index < 0 || index >= grid.children.length) {
     return undefined;
   }
@@ -387,6 +405,8 @@ function getChild(grid: CSSGridContainer, index: number): GridChild | undefined 
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("getChild should return child at specified index", () => {
     const grid = createEmptyGrid();
     const child1: TextContent = { content: "first" };
@@ -413,6 +433,8 @@ function getChildrenSize(grid: CSSGridContainer): number {
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("getChildrenSize should return the number of children", () => {
     const grid = createEmptyGrid();
     expect(getChildrenSize(grid)).toBe(0);

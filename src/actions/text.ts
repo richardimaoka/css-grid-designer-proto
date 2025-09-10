@@ -1,4 +1,3 @@
-import { test, expect } from "vitest";
 import { TextContent } from "../types";
 
 function getContent(textContent: TextContent): string {
@@ -6,6 +5,8 @@ function getContent(textContent: TextContent): string {
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("getContent should return the content string", () => {
     const textContent: TextContent = {
       content: "Hello World",
@@ -20,11 +21,13 @@ function changeContent(
 ): TextContent {
   return {
     ...textContent,
-    content: newContent
+    content: newContent,
   };
 }
 
 if (import.meta.vitest) {
+  const { test, expect } = import.meta.vitest;
+
   test("changeContent should change the content", () => {
     const textContent: TextContent = {
       content: "Original",

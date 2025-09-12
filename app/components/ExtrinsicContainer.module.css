@@ -6,9 +6,11 @@
 
   height: 100%;
 
+  /*
+   * Grid layout should be controlled by the internals.
+   * So nothing like align-items/content, justify-items/content specified here.
+   */
   display: grid;
-  align-content: center;
-  justifry-content: center;
 
   background-color: #fcfcfcff;
 }

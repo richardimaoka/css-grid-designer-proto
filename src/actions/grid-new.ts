@@ -104,4 +104,83 @@ if (import.meta.vitest) {
       });
     });
   });
+
+  function appendRect(
+    grid: CSSGridContainerNew,
+    rect: PlaceholderRectNew
+  ): CSSGridContainerNew {
+    const newGrid = { ...grid, children: [...grid.children, rect] };
+
+    const gridWidth =
+      newGrid.children.some((r) => r.width.type === SizingTypeNew.STRETCH) ||
+      grid.width.type === SizingTypeNew.STRETCH
+        ? stretchWidth
+        : hugWidth;
+
+    const gridHeight =
+      newGrid.children.some((r) => r.height.type === SizingTypeNew.STRETCH) ||
+      grid.height.type === SizingTypeNew.STRETCH
+        ? stretchHeight
+        : hugHeight;
+
+    return {
+      ...newGrid,
+      width: gridWidth,
+      height: gridHeight,
+    };
+  }
+
+  describe("appendRect", () => {
+    it("should append a rect to a grid", () => {
+      const rect1 = createPlaceholderRectNew(
+        widthCenter(100),
+        heightCenter(100)
+      );
+      const grid = encloseInGrid(rect1);
+
+      const rect2 = createPlaceholderRectNew(
+        widthCenter(200),
+        heightCenter(200)
+      );
+      const newGrid = appendRect(grid, rect2);
+
+      expect(newGrid.children.length).toBe(2);
+      expect(newGrid.children[0]).toBe(rect1);
+      expect(newGrid.children[1]).toBe(rect2);
+      expect(newGrid.width.type).toBe(SizingTypeNew.HUG);
+      expect(newGrid.height.type).toBe(SizingTypeNew.HUG);
+    });
+
+    it("should resize grid to stretch if a stretch rect is added", () => {
+      const rect1 = createPlaceholderRectNew(
+        widthCenter(100),
+        heightCenter(100)
+      );
+      const grid = encloseInGrid(rect1);
+      expect(grid.width.type).toBe(SizingTypeNew.HUG);
+      expect(grid.height.type).toBe(SizingTypeNew.HUG);
+
+      const rect2 = createPlaceholderRectNew(stretchWidth, heightCenter(200));
+      const newGrid = appendRect(grid, rect2);
+
+      expect(newGrid.width.type).toBe(SizingTypeNew.STRETCH);
+      expect(newGrid.height.type).toBe(SizingTypeNew.HUG);
+    });
+
+    it("should resize grid to stretch if a stretch height rect is added", () => {
+      const rect1 = createPlaceholderRectNew(
+        widthCenter(100),
+        heightCenter(100)
+      );
+      const grid = encloseInGrid(rect1);
+      expect(grid.width.type).toBe(SizingTypeNew.HUG);
+      expect(grid.height.type).toBe(SizingTypeNew.HUG);
+
+      const rect2 = createPlaceholderRectNew(widthCenter(200), stretchHeight);
+      const newGrid = appendRect(grid, rect2);
+
+      expect(newGrid.width.type).toBe(SizingTypeNew.HUG);
+      expect(newGrid.height.type).toBe(SizingTypeNew.STRETCH);
+    });
+  });
 }

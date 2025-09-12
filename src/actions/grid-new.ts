@@ -42,7 +42,7 @@ if (import.meta.vitest) {
   const { describe, it, expect } = import.meta.vitest;
 
   describe("encloseInGrid", () => {
-    it("should enclose a fixed width/height placeholder rect into a hug width/height CSS grid", () => {
+    it("should enclose a w:fixed/h:fixed rect into a w:hug/h:hug grid", () => {
       const rect = createPlaceholderRectNew(
         widthCenter(100),
         heightCenter(100)
@@ -55,7 +55,7 @@ if (import.meta.vitest) {
       });
     });
 
-    it("should enclose a stretch width/fixed height placeholder rect into a stretch width/hug height CSS grid", () => {
+    it("should enclose a w:stretch/h:fixed rect into a w:stretch/h:hug grid", () => {
       const rect = createPlaceholderRectNew(stretchWidth, heightCenter(100));
       const grid = encloseInGrid(rect);
       expect(grid).toEqual({
@@ -65,7 +65,7 @@ if (import.meta.vitest) {
       });
     });
 
-    it("should enclose a fixed width/stretch height placeholder rect into a hug width/stretch height CSS grid", () => {
+    it("should enclose a w:fixed/h:stretch rect into a w:hug/h:stretch grid", () => {
       const rect = createPlaceholderRectNew(widthCenter(100), stretchHeight);
       const grid = encloseInGrid(rect);
       expect(grid).toEqual({
@@ -75,7 +75,7 @@ if (import.meta.vitest) {
       });
     });
 
-    it("should enclose a stretch width/height placeholder rect into a stretch width/height CSS grid", () => {
+    it("should enclose a w:stretch/h:stretch rect into a w:stretch/h:stretch grid", () => {
       const rect = createPlaceholderRectNew(stretchWidth, stretchHeight);
       const grid = encloseInGrid(rect);
       expect(grid).toEqual({

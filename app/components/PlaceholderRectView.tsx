@@ -17,7 +17,7 @@ type Props = {
 
 function widthStyle(w: FixedWidth | StretchWidth): React.CSSProperties {
   if (w.type === SizingTypeNew.FIXED) {
-    return { width: `${w.valuePx}px` };
+    return { justifySelf: w.justifySelf, width: `${w.valuePx}px` };
   } else {
     return { justifySelf: w.justifySelf };
   }
@@ -25,7 +25,7 @@ function widthStyle(w: FixedWidth | StretchWidth): React.CSSProperties {
 
 function heightStyle(h: FixedHeight | StretchHeight): React.CSSProperties {
   if (h.type === SizingTypeNew.FIXED) {
-    return { height: `${h.valuePx}px` };
+    return { alignSelf: h.alignSelf, height: `${h.valuePx}px` };
   } else {
     return { alignSelf: h.alignSelf };
   }

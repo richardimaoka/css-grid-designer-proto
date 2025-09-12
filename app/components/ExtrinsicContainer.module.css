@@ -7,10 +7,13 @@
   height: 100%;
 
   /*
-   * Grid layout should be controlled by the internals.
-   * So nothing like align-items/content, justify-items/content specified here.
+   * Grid container should only control the track sizes(align/justify-icontent),
+   * not item sizes(align/justify-items).
+   * 
    */
   display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 
   background-color: #fcfcfcff;
 }

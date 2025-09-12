@@ -17,23 +17,19 @@ export type IntrinsicSizing = {
   type: SizingType.INTRINSIC;
 };
 
-export type RectSizing = FixedSizing | ExtrinsicSizing;
-
 export type PlaceholderRect = {
-  width: RectSizing;
-  height: RectSizing;
+  width: FixedSizing | ExtrinsicSizing;
+  height: FixedSizing | ExtrinsicSizing;
 };
 
 export type TextContent = {
   content: string;
 };
 
-export type GridSizing = IntrinsicSizing | ExtrinsicSizing;
-
 export type GridChild = PlaceholderRect | TextContent;
 
 export type CSSGridContainer = {
-  width: GridSizing;
-  height: GridSizing;
+  width: IntrinsicSizing | ExtrinsicSizing;
+  height: IntrinsicSizing | ExtrinsicSizing;
   children: GridChild[];
 };

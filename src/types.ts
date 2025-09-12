@@ -78,9 +78,15 @@ export type StretchHeight = {
 // Content Types
 // =================================================================================================
 
+// TODO: remove
 export type PlaceholderRect = {
   width: FixedSizing | ExtrinsicSizing;
   height: FixedSizing | ExtrinsicSizing;
+};
+
+export type PlaceholderRectNew = {
+  width: FixedWidth | StretchWidth;
+  height: FixedHeight | StretchHeight;
 };
 
 export type TextContent = {

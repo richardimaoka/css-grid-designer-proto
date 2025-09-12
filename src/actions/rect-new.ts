@@ -67,6 +67,21 @@ export const stretchHeight: StretchHeight = {
   alignSelf: AlignType.STRETCH,
 };
 
+/**
+ * Creates a new placeholder rectangle with the specified width and height.
+ *
+ * @param width The width of the rectangle, which can be fixed or stretched.
+ * @param height The height of the rectangle, which can be fixed or stretched.
+ * @returns A new placeholder rectangle.
+ *
+ * @example
+ * // Create a rectangle with fixed width and height
+ * const rect1 = createPlaceholderRectNew(widthCenter(100), heightCenter(200));
+ *
+ * @example
+ * // Create a rectangle that stretches to fill the available space
+ * const rect2 = createPlaceholderRectNew(stretchWidth, stretchHeight);
+ */
 export function createPlaceholderRectNew(
   width: FixedWidth | StretchWidth,
   height: FixedHeight | StretchHeight

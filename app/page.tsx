@@ -1,9 +1,13 @@
+import {
+  createPlaceholderRectNew,
+  heightCenter,
+  widthCenter,
+} from "@/src/actions/rect-new";
 import PageView from "./components/PageView";
 import PlaceholderRectView from "./components/PlaceholderRectView";
-import { createPlaceholderRect } from "@/src/actions/rect";
 
 export default function Home() {
-  const rect = createPlaceholderRect({ widthPx: 200 });
+  const rect = createPlaceholderRectNew(widthCenter(200), heightCenter(200));
 
   return (
     <PageView>

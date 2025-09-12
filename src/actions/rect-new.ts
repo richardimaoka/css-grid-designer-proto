@@ -1,6 +1,14 @@
-import { FixedWidth, JustifyType, SizingTypeNew, FixedHeight, AlignType } from "../types";
+import {
+  FixedWidth,
+  JustifyType,
+  SizingTypeNew,
+  FixedHeight,
+  AlignType,
+  StretchWidth,
+  StretchHeight,
+} from "../types";
 
-export function justifyCenter(widthPx: number): FixedWidth {
+export function widthCenter(widthPx: number): FixedWidth {
   return {
     type: SizingTypeNew.FIXED,
     justifySelf: JustifyType.CENTER,
@@ -8,7 +16,7 @@ export function justifyCenter(widthPx: number): FixedWidth {
   };
 }
 
-export function justifyStart(widthPx: number): FixedWidth {
+export function widthStart(widthPx: number): FixedWidth {
   return {
     type: SizingTypeNew.FIXED,
     justifySelf: JustifyType.START,
@@ -16,7 +24,7 @@ export function justifyStart(widthPx: number): FixedWidth {
   };
 }
 
-export function justifyEnd(widthPx: number): FixedWidth {
+export function widthEnd(widthPx: number): FixedWidth {
   return {
     type: SizingTypeNew.FIXED,
     justifySelf: JustifyType.END,
@@ -24,7 +32,12 @@ export function justifyEnd(widthPx: number): FixedWidth {
   };
 }
 
-export function alignCenter(heightPx: number): FixedHeight {
+export const stretchWidth: StretchWidth = {
+  type: SizingTypeNew.STRETCH,
+  justifySelf: JustifyType.STRETCH,
+};
+
+export function heightCenter(heightPx: number): FixedHeight {
   return {
     type: SizingTypeNew.FIXED,
     alignSelf: AlignType.CENTER,
@@ -32,7 +45,7 @@ export function alignCenter(heightPx: number): FixedHeight {
   };
 }
 
-export function alignStart(heightPx: number): FixedHeight {
+export function heightStart(heightPx: number): FixedHeight {
   return {
     type: SizingTypeNew.FIXED,
     alignSelf: AlignType.START,
@@ -40,10 +53,15 @@ export function alignStart(heightPx: number): FixedHeight {
   };
 }
 
-export function alignEnd(heightPx: number): FixedHeight {
+export function heightEnd(heightPx: number): FixedHeight {
   return {
     type: SizingTypeNew.FIXED,
     alignSelf: AlignType.END,
     valuePx: heightPx,
   };
 }
+
+export const stretchHeight: StretchHeight = {
+  type: SizingTypeNew.STRETCH,
+  alignSelf: AlignType.STRETCH,
+};

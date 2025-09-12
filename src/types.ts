@@ -73,7 +73,7 @@ export type FixedHeight = {
 
 export type StretchHeight = {
   type: SizingTypeNew.STRETCH;
-  alignSelf: JustifyType.STRETCH;
+  alignSelf: AlignType.STRETCH;
 };
 
 // =================================================================================================

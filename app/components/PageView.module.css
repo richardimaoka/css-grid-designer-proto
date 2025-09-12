@@ -3,5 +3,8 @@
 
   padding: 32px;
 
-  background-color: #aaadceff;
+  background-color: #f0f0f0;
+  background-size: 20px 20px;
+  background-image: linear-gradient(to right, #ddd 1px, transparent 1px),
+    linear-gradient(to bottom, #ddd 1px, transparent 1px);
 }

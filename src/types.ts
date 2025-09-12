@@ -14,6 +14,7 @@ export enum SizingTypeNew {
   STRETCH = "stretch",
 }
 
+// For width
 export enum JustifyType {
   START = "start",
   END = "end",
@@ -21,6 +22,7 @@ export enum JustifyType {
   STRETCH = "stretch",
 }
 
+// For height
 export enum AlignType {
   START = "start",
   END = "end",
@@ -54,7 +56,7 @@ export type IntrinsicSizing = {
 
 export type FixedWidth = {
   type: SizingTypeNew.FIXED;
-  justify: JustifyType.START | JustifyType.END | JustifyType.CENTER; // "stretch" is impossible with fixed width
+  justifySelf: JustifyType.START | JustifyType.END | JustifyType.CENTER; // "stretch" is impossible with fixed width
   valuePx: number;
 };
 

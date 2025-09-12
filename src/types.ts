@@ -12,6 +12,7 @@ export enum SizingType {
 export enum SizingTypeNew {
   FIXED = "fixed",
   STRETCH = "stretch",
+  HUG = "hug",
 }
 
 // For width
@@ -65,6 +66,10 @@ export type StretchWidth = {
   justifySelf: JustifyType.STRETCH;
 };
 
+export type HugWidth = {
+  type: SizingTypeNew.HUG;
+};
+
 export type FixedHeight = {
   type: SizingTypeNew.FIXED;
   alignSelf: AlignType.START | AlignType.END | AlignType.CENTER; // "stretch" is impossible with fixed width
@@ -74,6 +79,10 @@ export type FixedHeight = {
 export type StretchHeight = {
   type: SizingTypeNew.STRETCH;
   alignSelf: AlignType.STRETCH;
+};
+
+export type HugHeight = {
+  type: SizingTypeNew.HUG;
 };
 
 // =================================================================================================
@@ -101,4 +110,10 @@ export type CSSGridContainer = {
   width: IntrinsicSizing | ExtrinsicSizing;
   height: IntrinsicSizing | ExtrinsicSizing;
   children: GridChild[];
+};
+
+export type CSSGridContainerNew = {
+  width: FixedWidth | StretchWidth | HugWidth;
+  height: FixedHeight | StretchHeight | HugHeight;
+  children: PlaceholderRectNew[];
 };

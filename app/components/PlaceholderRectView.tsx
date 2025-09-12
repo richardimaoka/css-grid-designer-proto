@@ -17,7 +17,7 @@ const PlaceholderRectView: React.FC<Props> = ({ rect }) => {
     style.height = `${rect.height.valuePx}px`;
   }
 
-  return <div className={styles.component} style={style} />;
+  return <div className={styles.component} />;
 };
 
 export default PlaceholderRectView;

@@ -105,6 +105,17 @@ if (import.meta.vitest) {
     });
   });
 
+  /**
+   * Appends a placeholder rectangle to an existing CSS grid container.
+   * The grid's sizing properties (width and height) are updated based on the
+   * sizing properties of its children. If any child (including the newly added one)
+   * has a 'stretch' sizing type for a dimension, the grid will also become 'stretch'
+   * in that dimension. Otherwise, it remains 'hug'.
+   *
+   * @param grid The existing CSS grid container.
+   * @param rect The placeholder rectangle to append.
+   * @returns A new CSS grid container with the appended rectangle and updated sizing.
+   */
   function appendRect(
     grid: CSSGridContainerNew,
     rect: PlaceholderRectNew

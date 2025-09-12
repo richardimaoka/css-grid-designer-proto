@@ -22,8 +22,27 @@ export const hugHeight: HugHeight = {
 };
 
 /**
+ * Encloses a placeholder rectangle within a CSS grid container.
+ * The grid container's dimensions are determined by the rectangle's sizing properties.
+ * If the rectangle's width or height is set to stretch, the grid will also stretch in that dimension.
+ * Otherwise, the grid will hug the content.
  *
- * @param rect
+ * @param rect The placeholder rectangle to enclose.
+ * @returns A new CSS grid container with the rectangle as its child.
+ *
+ * @example
+ * // Enclose a fixed-size rectangle
+ * const rect = createPlaceholderRectNew(widthCenter(100), heightCenter(200));
+ * const grid = encloseInGrid(rect);
+ * // grid.width will be 'hug'
+ * // grid.height will be 'hug'
+ *
+ * @example
+ * // Enclose a rectangle that stretches horizontally
+ * const rect = createPlaceholderRectNew(stretchWidth, heightCenter(200));
+ * const grid = encloseInGrid(rect);
+ * // grid.width will be 'stretch'
+ * // grid.height will be 'hug'
  */
 function encloseInGrid(rect: PlaceholderRectNew): CSSGridContainerNew {
   const gridWidth =
